@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Quintaquor Name Generator</title>
+<style>
+ html, body, canvas, div { margin: 0; padding: 0 }
+ body { overflow-x: visible; overflow-y: hidden; }
+ canvas { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+</style>
+
+<div id="names"></div>
+<button name="generate">Generate</button>
+
+<script src="lib/revgram.js"></script>
+<script src="lib/jquery.min.js"></script>
+<script src="lib/jquery.mousewheel.js"></script>
+<script>//<![CDATA[
+ jQuery(function($) {
+     $.getJSON('quintaquor.json', function(data) {
+         console.log(data);
+         var generate = function() {
+             var nameDiv = $('#names');
+             nameDiv.empty();
+             for (var ii = 0; ii < 10; ++ii)
+                 nameDiv.append(
+                     '<div>' + revgram.generate(data, 'name') +
+                     '</div>');
+         };
+         $('button[name="generate"]').on('click', generate);
+         generate();
+     });
+ }); //]]></script>
