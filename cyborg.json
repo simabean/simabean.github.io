@@ -87,13 +87,14 @@
                 "support": 1,
                 "informative": 2,
                 "offense": 1,
-                "any": 2
+                "any": 1
             },
-            "justicar": { "any": 2 },
+            "justicar": { "any": 1 },
+			"renegade": { "any": 1 },
             "pirate": { "pirate": 2 },
             "infiltrator": {
                 "offense": 2,
-                "any": 1
+                "any": 2
             }
         }
     },
