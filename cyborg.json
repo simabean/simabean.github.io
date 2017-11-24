@@ -80,6 +80,22 @@
                 "any": 1
             }
         }
+		"pirate": {
+            "loyalist": {
+                "console": 1,
+                "protective": 2,
+                "support": 1,
+                "informative": 2,
+                "offense": 1,
+                "any": 2
+            },
+            "justicar": { "any": 2 },
+            "pirate": { "pirate": 2 },
+            "infiltrator": {
+                "offense": 2,
+                "any": 1
+            }
+        }
     },
     "roles": {
         "console": {
@@ -197,7 +213,7 @@
             "defense": 3,
             "comment": [
                 "Target one cyborg and attack with all visitors, ",
-                "ignoring any defense"]
+                "dealing 3 damage"]
         },
         "bomber": {
             "restriction": "pirate",
@@ -205,7 +221,7 @@
             "defense": 3,
             "comment": [
                 "Target one cyborg to sabotage or self to destroy ",
-                "all sabotaged targets, ignoring defense"]
+                "all sabotaged targets, dealing 3 damage"]
         },
 		"grenadier": {
             "restriction": "pirate",
