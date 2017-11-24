@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <title>Cybrog</title>
+<style>
+ h1 { display: inline-block; margin: 0; }
+</style>
 
 <h1>Cyborg</h1>
+<select id="scenarios"></select>
+<button name="generate">generate</button>
 <ul id="roles"></ul>
 <div id="footer"></div>
 
 <script src="lib/jquery.min.js"></script>
 <script src="cyborg.js"></script>
 <script>
+ var cyborgData = {};
+ var setRoles = function(list) {
+     $('#roles').empty();
+     cyborg.createRoleList(cyborgData, list).forEach(function(role) {
+         var faction = role ? role[0] : 'none';
+         var roleName = role ? role[1] : 'none';
+         $('#roles').append(
+             '<li>' + faction + ' ' + roleName + '</li>');
+     });
+ };
+
  jQuery(function($) {
-    cyborg.start($, function(roles) {
-        roles.forEach(function(role) {
-            var faction = role ? role[0] : 'none';
-            var roleName = role ? role[1] : 'none';
-            $('#roles').append(
-                '<li>' + faction + ' ' + roleName + '</li>');
-        });
-        $('#footer').append('Done');
-    });
+     var scenarios = $('#scenarios');
+     scenarios.on('change', function(event) {
+         setRoles($(event.target).val());
+     });
+     $('button[name="generate"]').on('click', function(event) {
+         setRoles(scenarios.val());
+     });
+
+     cyborg.start($, function(data) {
+         cyborgData = data;
+         scenarios.empty();
+         Object.keys(data.scenarios).forEach(function(scenario) {
+             scenarios.append(
+                 '<option' + (scenario === cyborgData.scenaroDefault ?
+                              ' selected="selected"' : '') + '>' +
+                 scenario + '</option>');
+         });
+
+         setRoles(scenarios.val());
+         $('#footer').append('Done');
+     });
+
+     
  });
 </script>

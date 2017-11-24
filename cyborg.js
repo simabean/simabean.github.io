@@ -34,16 +34,14 @@
                  role['restriction'] == faction) &&
                 (!role['unique'] || !(roleName in existing)))
                 possibilities.push([faction, roleName]);
-            console.log(roleName, role['category'], role['restriction'], role['unique'], ':::', category, faction, possibilities);
         });
 
-        console.log(possibilities);
         return shuffle(possibilities)[0];
     };
 
-    var createRoleList = function(data) {
+    cyborg.createRoleList = function(data, list) {
         var roles = [];
-        var scenario = data.scenarios[data.scenarioDefault];
+        var scenario = data.scenarios[list];
 
         Object.keys(scenario).forEach(function(faction) {
             Object.keys(scenario[faction]).forEach(function(category) {
@@ -58,9 +56,7 @@
 
     cyborg.start = function($, callback) {
         $.getJSON('cyborg.json')
-         .done(function(data) {
-             callback(createRoleList(data));
-         })
+         .done(callback)
          .fail(function(jqxhr, textStatus, error) {
              var err = textStatus + ", " + error;
              console.log( "Request Failed: " + err );
