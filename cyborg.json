@@ -110,7 +110,7 @@
             "comment": [
                 "Target one cybrog and repair it if attacked"]
         },
-        "guardian": {
+        "protector": {
             "restriction": "loyalist",
             "category": "protective",
             "comment": [
@@ -130,9 +130,9 @@
                 "Target one cyborg for a set of roles it might have."],
             "categories": [
                 ["assault", "avenger"],
-                ["detective", "interrogator", "vendetta"],
-                ["supressor"],
-                ["console", "bosun", "commander"],
+                ["detective", "interrogator", "vendetta", "scout"],
+                ["supressor", "medic"],
+                ["console", "bosun", "commander", "guardian"],
                 ["router", "hypnotist"],
                 ["inquisitor", "overload", "pretender"],
                 ["blank", "stowaway"]]
@@ -177,7 +177,7 @@
                 "Target one cyborg - assume its role for detectives ",
                 "and if killed"]
         },
-        "evesdropper": {
+        "eavesdropper": {
             "restriction": "infiltrator",
             "comment": [
                 "Able to read whispers"]
@@ -206,6 +206,17 @@
                 "Target one cyborg to sabotage or self to destroy ",
                 "all sabotaged targets, ignoring defense"]
         },
+		"grenadier": {
+            "restriction": "pirate",
+            "category": "pirate",
+			"experimental": true,
+            "defense": 3,
+            "comment": [
+                "Sabatgoes someone and all their visitors at night.",
+                "When all non-pirates are sabotaged, everyone will take 3 damage.",
+				"You know who is sabotaged, and if you visit a sabotaged person again, they will be spared.",
+				"All their visitors will still be sabotaged."]
+        },
         "stowaway": {
             "restriction": "neutral",
             "category": "neutral",
@@ -220,6 +231,17 @@
             "comment": [
                 "Target one uploaded cyborg to assume that role ",
                 "and loyalty and win conditions"]
+        },
+		"guardian": {
+            "restriction": "neutral",
+			"experimental": true,
+            "category": "neutral",
+            "defense": 0,
+            "comment": [
+                "Receive a random target at the start of the game.",
+                "Keep them alive to win.",
+				"You can roleblock all your target's visitors.",
+				"You must wait two nights after using this to use it again."]
         },
         "hypnotist": {
             "defense": 1,
@@ -246,6 +268,16 @@
                 "When executed target one guilty judge to be ",
                 "overloaded or one will be chosen automatically. ",
                 "Win only if executed"]
+        },
+        "recycler": {
+            "defense": 1,
+            "category": "malefactor",
+            "restriction": "malefactor",
+			"experimental": true,
+            "comment": [
+                "Use the ability of a uploaded cyborg on someone.",
+                "Use each function only once.",
+                "Win only if town loses."]
         }
     }
 }
