@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<title>Cybrog</title>
+
+<h1>Cyborg</h1>
+<ul id="roles"></ul>
+<div id="footer"></div>
+
+<script src="lib/jquery.min.js"></script>
+<script src="cyborg.js"></script>
+<script>
+ jQuery(function($) {
+    cyborg.start($, function(roles) {
+        roles.forEach(function(role) {
+            var faction = role ? role[0] : 'none';
+            var roleName = role ? role[1] : 'none';
+            $('#roles').append(
+                '<li>' + faction + ' ' + roleName + '</li>');
+        });
+        $('#footer').append('Done');
+    });
+ });
+</script>

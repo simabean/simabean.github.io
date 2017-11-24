@@ -48,6 +48,7 @@
                 "Usually hostile to pirates"]
         }
     },
+    "scenarioDefault": "small",
     "scenarios": {
         "small": {
             "loyalist": {
@@ -118,8 +119,8 @@
         "inquisitor": {
             "category": "informative",
             "comment": [
-                "Target one cyborg and learn its loyalty. "
-                "Doing so inverts the results for opposing agents "
+                "Target one cyborg and learn its loyalty. ",
+                "Doing so inverts the results for opposing agents ",
                 "and notifies the subject that they were interrogated."]
         },
         "detective": {
@@ -127,9 +128,13 @@
             "comment": [
                 "Target one cyborg for a set of roles it might have."],
             "categories": [
-                ["surpressor", "router"],
-                ["offence"],
-            ]
+                ["assault", "avenger"],
+                ["detective", "interrogator", "vendetta"],
+                ["supressor"],
+                ["console", "bosun", "commander"],
+                ["router", "hypnotist"],
+                ["inquisitor", "overload", "pretender"],
+                ["blank", "stowaway"]]
         },
         "scout": {
             "category": "informative",
@@ -215,7 +220,7 @@
                 "Target one uploaded cyborg to assume that role ",
                 "and loyalty and win conditions"]
         },
-        "hacker": {
+        "hypnotist": {
             "defense": 1,
             "category": "malefactor",
             "restriction": "malefactor",
