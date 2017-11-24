@@ -129,13 +129,14 @@
             "comment": [
                 "Target one cyborg for a set of roles it might have."],
             "categories": [
-                ["assault", "avenger"],
+                ["assault", "avenger", "buccaneer"],
                 ["detective", "interrogator", "vendetta", "scout"],
-                ["supressor", "medic"],
-                ["console", "bosun", "commander", "guardian"],
-                ["router", "hypnotist"],
+                ["supressor", "medic", "guardian"],
+                ["console", "bosun", "commander", "protector"],
+                ["router", "hypnotist", "recycler"],
                 ["inquisitor", "overload", "pretender"],
-                ["blank", "stowaway"]]
+                ["blank", "stowaway"],
+				["grenadier", "bomber", "berzerker"]]
         },
         "scout": {
             "category": "informative",
