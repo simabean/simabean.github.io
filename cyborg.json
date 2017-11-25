@@ -188,18 +188,21 @@
         "router": {
             "unique": true,
             "restriction": "loyalist",
+			"category": "support",
             "comment": [
                 "Target two cyborgs - attempts to visit one will ",
                 "visit the other and vice versa."]
         },
         "pretender": {
             "restriction": "infiltrator",
+			"category": "support",
             "comment": [
                 "Target one cyborg - assume its role for detectives ",
                 "and if killed"]
         },
         "eavesdropper": {
             "restriction": "infiltrator",
+			"category": "support",
             "comment": [
                 "Able to read whispers"]
         },
