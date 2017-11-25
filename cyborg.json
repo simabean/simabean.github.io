@@ -15,6 +15,12 @@
         "group to vote on one cyborg to upload, shutting down its ",
         "body for the good of the ship.  Who will gain control?"
     ],
+    "names": {
+        "start": [[1, "%pre", "%sfx"], [2, "%pre", "%mid", "%sfx"]],
+        "pre": ["Ap", "B", "D", "S", "Z"],
+        "mid": ["ol", "im", "en"],
+        "sfx": ["lo", "ig", "on"]
+    },    
     "factions": {
         "loyalist": {
             "comment": [
@@ -82,7 +88,7 @@
                 "any": 1
             }
         },
-		"pirate": {
+	"pirate": {
             "loyalist": {
                 "console": 1,
                 "protective": 2,
@@ -92,11 +98,11 @@
                 "any": 1
             },
             "justicar": { "any": 1 },
-			"renegade": { "any": 1 },
+	    "renegade": { "any": 1 },
             "pirate": { "offense": 2 },
             "infiltrator": {
                 "commander": 1,
-				"assault": 1,
+		"assault": 1,
                 "any": 2
             }
         }

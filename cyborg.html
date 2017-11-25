@@ -2,23 +2,30 @@
 <title>Cybrog</title>
 <style>
  h1 { display: inline-block; margin: 0; }
+ table td { border: 1px solid black; }
 </style>
 
 <h1>Cyborg</h1>
 <select id="scenarios"></select>
 <button name="generate">generate</button>
-<ul id="roles"></ul>
+<table id="roles">
+</table>
 <div id="footer"></div>
 
 <script src="lib/jquery.min.js"></script>
+<script src="lib/revgram.js"></script>
 <script src="cyborg.js"></script>
 <script>
  var cyborgData = {};
  var setRoles = function(list) {
      $('#roles').empty();
+     $('#roles').append('<tr><th>Name</th><th>Role</th></tr>');
+
      cyborg.createRoleList(cyborgData, list).forEach(function(entry) {
+         var name = revgram.generate(cyborgData.names, 'start');
          $('#roles').append(
-             '<li>' + entry.faction + ' ' + entry.role + '</li>');
+             '<tr><td>' + name + '</td><td> ' + entry.faction + ' ' +
+             entry.role + '</tr>');
      });
  };
 
@@ -42,9 +49,6 @@
          });
 
          setRoles(scenarios.val());
-         $('#footer').append('Done');
      });
-
-     
  });
 </script>
