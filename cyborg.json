@@ -105,7 +105,7 @@
         "console": {
             "restriction": "loyalist",
             "category": "support",
-            "unqiue": true,
+            "unique": true,
             "comment": [
                 "Able to speak to and hear uploaded players at night ",
                 "and can choose a live cyborg to communicate with ",

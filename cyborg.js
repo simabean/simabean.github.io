@@ -22,36 +22,63 @@
         return elements;
     }
 
-    var chooseRole = function(roles, existing, faction, category) {
-        var possibilities = [];
-
-        Object.keys(roles).forEach(function(roleName) {
-            var role = roles[roleName];
-
-            if ((category === 'any' || category === role['category'] ||
-                 category === roleName) &&
-                (!role['restriction'] ||
-                 role['restriction'] == faction) &&
-                (!role['unique'] || !(roleName in existing)))
-                possibilities.push([faction, roleName]);
-        });
-
-        return shuffle(possibilities)[0];
-    };
-
     cyborg.createRoleList = function(data, list) {
-        var roles = [];
+        var result = [];
+        var possibles = [];
         var scenario = data.scenarios[list];
+        var selected = {};
 
+        // Build a list of possible roles for each position
         Object.keys(scenario).forEach(function(faction) {
+            selected[faction] = {};
+
             Object.keys(scenario[faction]).forEach(function(category) {
                 var count = scenario[faction][category];
-                while (count-- > 0)
-                    roles.push(chooseRole(
-                        data.roles, roles, faction, category));
+                var current;
+
+                while (count-- > 0) {
+                    current = {faction: faction, category: category,
+                               roles: []};
+                    possibles.push(current);
+
+                    Object.keys(data.roles).forEach(function(roleName) {
+                        var role = data.roles[roleName];
+
+                        if ((category === 'any' ||
+                             category === role['category'] ||
+                             category === roleName) &&
+                            (!role['restriction'] ||
+                             role['restriction'] == faction))
+                            current.roles.push(roleName);
+                    });
+                }
             });
         });
-        return roles;
+
+        possibles.sort(function(a, b) {
+            return (a.roles.length < b.roles.length) ? -1 :
+                   ((a.roles.length > b.roles.length) ? 1 : 0); });
+        possibles.forEach(function(possible) {
+            var current, chosen = undefined;
+
+            shuffle(possible.roles);
+            while (!chosen && possible.roles.length) {
+                current = possible.roles.pop();
+                if (!data.roles[current] ||
+                    !data.roles[current].unique ||
+                    !selected[possible.faction][current])
+                    chosen = current;
+            }
+
+            if (chosen) {
+                result.push({faction: possible.faction,
+                             role: chosen});
+                selected[possible.faction][chosen] = true;
+            } else throw {faction: possible.faction,
+                          category: possible.category};
+        });
+
+        return shuffle(result);
     };
 
     cyborg.start = function($, callback) {

@@ -16,11 +16,9 @@
  var cyborgData = {};
  var setRoles = function(list) {
      $('#roles').empty();
-     cyborg.createRoleList(cyborgData, list).forEach(function(role) {
-         var faction = role ? role[0] : 'none';
-         var roleName = role ? role[1] : 'none';
+     cyborg.createRoleList(cyborgData, list).forEach(function(entry) {
          $('#roles').append(
-             '<li>' + faction + ' ' + roleName + '</li>');
+             '<li>' + entry.faction + ' ' + entry.role + '</li>');
      });
  };
 
