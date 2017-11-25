@@ -137,6 +137,15 @@
                 "Target one cyborg, who is protected, and destroy one ",
                 "attacker at the cost of your own life"]
         },
+		"armorer": {
+            "restriction": "loyalist",
+            "category": "protective",
+			"experimental": true,
+			"defense": 2,
+            "comment": [
+                "Target one cyborg, and give them a point of defense.",
+                "This removes a point of your defense."]
+        },
         "inquisitor": {
             "category": "informative",
             "comment": [
