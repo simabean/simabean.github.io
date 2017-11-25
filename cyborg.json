@@ -61,7 +61,8 @@
             },
             "malefactor": { "malefactor": 1 },
             "infiltrator": {
-                "offense": 2
+                "commander": 1
+				"assault": 1
             }
         },
         "medium": {
@@ -74,9 +75,10 @@
                 "any": 2
             },
             "malefactor": { "malefactor": 1 },
-            "pirate": { "pirate": 1 },
+            "pirate": { "offense": 1 },
             "infiltrator": {
-                "offense": 2,
+                "commander": 1,
+				"assault": 1,
                 "any": 1
             }
         },
@@ -91,9 +93,10 @@
             },
             "justicar": { "any": 1 },
 			"renegade": { "any": 1 },
-            "pirate": { "pirate": 2 },
+            "pirate": { "offense": 2 },
             "infiltrator": {
-                "offense": 2,
+                "commander": 1,
+				"assault": 1,
                 "any": 2
             }
         }
@@ -200,16 +203,9 @@
             "comment": [
                 "Able to read whispers"]
         },
-        "buccaneer": {
-            "restriction": "pirate",
-            "category": "pirate",
-            "defense": 3,
-            "comment": [
-                "Target one cyborg to attack each cycle"]
-        },
         "berzerker": {
             "restriction": "pirate",
-            "category": "pirate",
+            "category": "offense",
             "unique": true,
             "defense": 3,
             "comment": [
@@ -218,7 +214,7 @@
         },
         "bomber": {
             "restriction": "pirate",
-            "category": "pirate",
+            "category": "offense",
             "defense": 3,
             "comment": [
                 "Target one cyborg to sabotage or self to destroy ",
@@ -226,7 +222,7 @@
         },
 		"grenadier": {
             "restriction": "pirate",
-            "category": "pirate",
+            "category": "offense",
 			"experimental": true,
             "defense": 3,
             "comment": [
