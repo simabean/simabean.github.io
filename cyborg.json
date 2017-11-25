@@ -48,7 +48,7 @@
                 "Usually hostile to pirates"]
         }
     },
-    "scenarioDefault": "small",
+    "scenarioDefault": "pirate",
     "scenarios": {
         "small": {
             "loyalist": {
