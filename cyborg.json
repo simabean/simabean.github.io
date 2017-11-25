@@ -31,13 +31,15 @@
         },
         "infiltrator": {
             "comment": [
-                "At least one infiltrator must be alive while all ",
-                "loyalists and pirates are dead"]
+                "At least one infiltrator must be alive while all",
+                "loyalists and pirates are dead",
+				"Infiltrators have a private night chat"]
         },
         "pirate": {
             "comment": [
                 "At least one pirate must be alive while all ",
-                "infiltrators and loyalists are dead"]
+                "infiltrators and loyalists are dead",
+				"All pirates know the identities of other pirates."]
         },
         "neutral": {
             "comment": [
@@ -177,6 +179,7 @@
         },
         "scout": {
             "category": "informative",
+			"restriction": "loyalist",
             "comment": [
                 "Target one cyborg and see all who visit as well as ",
                 "all notifications that cyborg receives."]
