@@ -16,10 +16,12 @@
         "body for the good of the ship.  Who will gain control?"
     ],
     "names": {
-        "start": [[1, "%pre", "%sfx"], [2, "%pre", "%mid", "%sfx"]],
+        "start": [[2, "%pre", "%sfx"], [3, "%pre", "%mid", "%sfx"], [1, "%pre2", "%sfx"], [1, "%pre", "%sfx2"]],
         "pre": ["Ap", "B", "D", "S", "Z"],
+		"pre2": ["Zel'", "Zon'"],
         "mid": ["ol", "im", "en"],
-        "sfx": ["lo", "ig", "on"]
+        "sfx": ["lo", "ig", "on"],
+		"sfx2": ["'eleg", "'enes", "'zon"]
     },    
     "factions": {
         "loyalist": {
