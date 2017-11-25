@@ -61,7 +61,7 @@
             },
             "malefactor": { "malefactor": 1 },
             "infiltrator": {
-                "commander": 1
+                "commander": 1,
 				"assault": 1
             }
         },
