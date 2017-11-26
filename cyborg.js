@@ -22,15 +22,17 @@
         return elements;
     }
 
-    cyborg.createRoleList = function(data, list) {
+    cyborg.createMatch = function(config, scenarioName) {
         var result = [];
         var possibles = [];
-        var scenario = data.scenarios[list];
-        var selected = {};
+        var scenario = config.scenarios[
+            scenarioName || config.scenarioDefault];
+        var rolesUsed = {};
+        var namesUsed = {};
 
         // Build a list of possible roles for each position
         Object.keys(scenario).forEach(function(faction) {
-            selected[faction] = {};
+            rolesUsed[faction] = {};
 
             Object.keys(scenario[faction]).forEach(function(category) {
                 var count = scenario[faction][category];
@@ -41,8 +43,8 @@
                                roles: []};
                     possibles.push(current);
 
-                    Object.keys(data.roles).forEach(function(roleName) {
-                        var role = data.roles[roleName];
+                    Object.keys(config.roles).forEach(function(roleName) {
+                        var role = config.roles[roleName];
 
                         if ((category === 'any' ||
                              category === role['category'] ||
@@ -59,21 +61,32 @@
             return (a.roles.length < b.roles.length) ? -1 :
                    ((a.roles.length > b.roles.length) ? 1 : 0); });
         possibles.forEach(function(possible) {
-            var current, chosen = undefined;
+            var current;
+            var chosen = undefined;
+            var name = undefined;
+            var count;
 
             shuffle(possible.roles);
             while (!chosen && possible.roles.length) {
                 current = possible.roles.pop();
-                if (!data.roles[current] ||
-                    !data.roles[current].unique ||
-                    !selected[possible.faction][current])
+                if (!config.roles[current] ||
+                    !config.roles[current].unique ||
+                    !rolesUsed[possible.faction][current])
                     chosen = current;
             }
 
             if (chosen) {
-                result.push({faction: possible.faction,
+                count = 20;
+                while (!name && (count-- > 0)) {
+                    name = revgram.generate(config.names, 'start');
+                    if (name in namesUsed)
+                        name = undefined;
+                    else namesUsed[name] = true;
+                }
+
+                result.push({name: name, faction: possible.faction,
                              role: chosen});
-                selected[possible.faction][chosen] = true;
+                rolesUsed[possible.faction][chosen] = true;
             } else throw {faction: possible.faction,
                           category: possible.category};
         });

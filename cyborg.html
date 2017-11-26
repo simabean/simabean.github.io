@@ -18,27 +18,14 @@
 <script>
  var cyborgData = {};
 
- var getName = function(nameSet) {
-     var name = undefined;
-     var count = 20;
-
-     while (!name && (count-- > 0)) {
-         name = revgram.generate(cyborgData.names, 'start');
-         if (name in nameSet)
-             name = undefined;
-         else nameSet[name] = true;
-     }
-     return name;
- };
-
  var setRoles = function(list) {
      var nameSet = {};
      $('#roles').empty();
      $('#roles').append('<tr><th>Name</th><th>Role</th></tr>');
 
-     cyborg.createRoleList(cyborgData, list).forEach(function(entry) {
+     cyborg.createMatch(cyborgData, list).forEach(function(entry) {
          $('#roles').append(
-             '<tr><td>' + getName(nameSet) + '</td><td> ' +
+             '<tr><td>' + entry.name + '</td><td> ' +
              entry.faction + ' ' +  entry.role + '</tr>');
      });
  };
