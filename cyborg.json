@@ -16,12 +16,15 @@
         "body for the good of the ship.  Who will gain control?"
     ],
     "names": {
-        "start": [[2, "%pre", "%sfx"], [3, "%pre", "%mid", "%sfx"], [1, "%pre2", "%sfx"], [1, "%pre", "%sfx2"]],
+        "start": [[2, "%pre", "%sfx"],
+                  [3, "%pre", "%mid", "%sfx"],
+                  [1, "%pre2", "%sfx"],
+                  [1, "%pre", "%sfx2"]],
         "pre": ["Ap", "B", "D", "S", "Z"],
-		"pre2": ["Zel'", "Zon'"],
+	"pre2": ["Zel'", "Zon'"],
         "mid": ["ol", "im", "en"],
         "sfx": ["lo", "ig", "on"],
-		"sfx2": ["'eleg", "'enes", "'zon"]
+	"sfx2": ["'eleg", "'enes", "'zon"]
     },    
     "factions": {
         "loyalist": {
@@ -33,13 +36,13 @@
             "comment": [
                 "At least one infiltrator must be alive while all",
                 "loyalists and pirates are dead",
-				"Infiltrators have a private night chat"]
+		"Infiltrators have a private night chat"]
         },
         "pirate": {
             "comment": [
                 "At least one pirate must be alive while all ",
                 "infiltrators and loyalists are dead",
-				"All pirates know the identities of other pirates."]
+		"All pirates know the identities of other pirates."]
         },
         "neutral": {
             "comment": [
@@ -72,7 +75,7 @@
             "malefactor": { "malefactor": 1 },
             "infiltrator": {
                 "commander": 1,
-				"assault": 1
+		"assault": 1
             }
         },
         "medium": {
@@ -88,7 +91,7 @@
             "pirate": { "offense": 1 },
             "infiltrator": {
                 "commander": 1,
-				"assault": 1,
+		"assault": 1,
                 "any": 1
             }
         },
@@ -147,11 +150,11 @@
                 "Target one cyborg, who is protected, and destroy one ",
                 "attacker at the cost of your own life"]
         },
-		"armorer": {
+	"armorer": {
             "restriction": "loyalist",
             "category": "protective",
-			"experimental": true,
-			"defense": 2,
+	    "experimental": true,
+	    "defense": 2,
             "comment": [
                 "Target one cyborg, and give them a point of defense.",
                 "This removes a point of your defense."]
@@ -175,11 +178,11 @@
                 ["router", "hypnotist", "recycler"],
                 ["inquisitor", "overload", "pretender", "eavesdropper"],
                 ["blank", "stowaway"],
-				["grenadier", "bomber", "armorer"]]
+		["grenadier", "bomber", "armorer"]]
         },
         "scout": {
             "category": "informative",
-			"restriction": "loyalist",
+	    "restriction": "loyalist",
             "comment": [
                 "Target one cyborg and see all who visit as well as ",
                 "all notifications that cyborg receives."]
@@ -208,21 +211,21 @@
         "router": {
             "unique": true,
             "restriction": "loyalist",
-			"category": "support",
+	    "category": "support",
             "comment": [
                 "Target two cyborgs - attempts to visit one will ",
                 "visit the other and vice versa."]
         },
         "pretender": {
             "restriction": "infiltrator",
-			"category": "support",
+	    "category": "support",
             "comment": [
                 "Target one cyborg - assume its role for detectives ",
                 "and if killed"]
         },
         "eavesdropper": {
             "restriction": "infiltrator",
-			"category": "support",
+	    "category": "support",
             "comment": [
                 "Able to read whispers"]
         },
@@ -243,16 +246,17 @@
                 "Target one cyborg to sabotage or self to destroy ",
                 "all sabotaged targets, dealing 3 damage"]
         },
-		"grenadier": {
+	"grenadier": {
             "restriction": "pirate",
             "category": "offense",
-			"experimental": true,
+	    "experimental": true,
             "defense": 3,
             "comment": [
                 "Sabatgoes someone and all their visitors at night.",
-                "When all non-pirates are sabotaged, everyone will take 3 damage.",
-				"You know who is sabotaged, and if you visit a sabotaged person again, they will be spared.",
-				"All their visitors will still be sabotaged."]
+                "When all non-pirates are sabotaged, everyone will ",
+		"take 3 damage. You know who is sabotaged, and if ",
+                "you visit a sabotaged person again, they will be ",
+		"spared. All their visitors will still be sabotaged."]
         },
         "stowaway": {
             "restriction": "neutral",
@@ -269,16 +273,16 @@
                 "Target one uploaded cyborg to assume that role ",
                 "and loyalty and win conditions"]
         },
-		"guardian": {
+	"guardian": {
             "restriction": "neutral",
-			"experimental": true,
+	    "experimental": true,
             "category": "neutral",
             "defense": 0,
             "comment": [
                 "Receive a random target at the start of the game.",
-                "Keep them alive to win.",
-				"You can roleblock all your target's visitors.",
-				"You must wait two nights after using this to use it again."]
+                "Keep them alive to win.  You can roleblock all your ",
+		"target's visitors. You must wait two nights after ",
+		"using this to use it again."]
         },
         "hypnotist": {
             "defense": 1,
@@ -310,11 +314,11 @@
             "defense": 1,
             "category": "malefactor",
             "restriction": "malefactor",
-			"experimental": true,
+	    "experimental": true,
             "comment": [
                 "Use the ability of a uploaded cyborg on someone.",
                 "Use each function only once.",
-                "Win only if town loses."]
+                "Win only if loyalists lose."]
         }
     }
 }
