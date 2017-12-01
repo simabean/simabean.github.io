@@ -94,6 +94,22 @@
         return shuffle(result);
     };
 
+    cyborg.detect = function(config, role) {
+        var categories = config.roles.detective.categories;
+        var result = [];
+
+        categories.forEach(function(list) {
+            var found = false;
+            list.forEach(function(current) {
+                if (current === role)
+                    found = true;
+            });
+            if (found)
+                result = list;
+        });
+        return result;
+    };
+
     cyborg.start = function($, callback) {
         $.getJSON('cyborg.json')
          .done(callback)

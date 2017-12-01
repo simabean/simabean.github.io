@@ -2,12 +2,14 @@
 <title>Cyborg</title>
 <style>
  h1 { display: inline-block; margin: 0; }
- table td { border: 1px solid black; }
+ td { border: 1px solid black; }
+ td.role { display: none; }
+ th.role { display: none; }
 </style>
 
-<h1>Cyborg</h1>
-<select id="scenarios"></select>
-<button name="generate">generate</button>
+<div id="header">
+    <h1>Cyborg</h1>
+</div>
 <table id="roles">
 </table>
 <div id="footer"></div>
@@ -17,26 +19,50 @@
 <script src="cyborg.js"></script>
 <script>
  var cyborgData = {};
+ var buttonage = false;
 
  var setRoles = function(list) {
      var nameSet = {};
      $('#roles').empty();
-     $('#roles').append('<tr><th>Name</th><th>Role</th></tr>');
+     $('#roles').append(
+         '<tr><th>Name</th><th class="role">Role</th>' +
+         '<th>Detected</th></tr>');
 
      cyborg.createMatch(cyborgData, list).forEach(function(entry) {
          $('#roles').append(
-             '<tr><td>' + entry.name + '</td><td> ' +
-             entry.faction + ' ' +  entry.role + '</tr>');
+             '<tr><td>' + entry.name + '</td><td class="role"> ' +
+             entry.faction + ' ' +  entry.role + '</td> ' +
+             '<td><button class="detect" class="detected" data-role="' +
+             entry.role + '" data-faction="' + entry.faction +
+             '">Detect</button></td></tr>');
      });
  };
 
  jQuery(function($) {
+     $('#header').append('<select id="scenarios"></select>');
+     $('#header').append('<button name="generate">generate</button>');
+     $('#header').append(
+         '<input name="showroles" type="checkbox" />Show Roles');
+
      var scenarios = $('#scenarios');
      scenarios.on('change', function(event) {
          setRoles($(event.target).val());
      });
      $('button[name="generate"]').on('click', function(event) {
          setRoles(scenarios.val());
+     });
+     $('input[name="showroles"]').on('change', function(event) {
+         $('table td.role').toggle();
+         $('table th.role').toggle();
+     });
+     $('table').on('click', 'button.detect', function(event) {
+         var target = $(event.target);
+         var list = cyborg.detect(
+             cyborgData, target.attr('data-role'));
+         var parent = target.parent();
+         parent.empty();
+         parent.append(list.join(', '));
+         console.log(list);
      });
 
      cyborg.start($, function(data) {
@@ -51,5 +77,6 @@
 
          setRoles(scenarios.val());
      });
+
  });
 </script>
