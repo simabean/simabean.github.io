@@ -84,10 +84,13 @@
                     else namesUsed[name] = true;
                 }
 
-                result.push({name: name, faction: possible.faction,
-                             role: chosen});
+                result.push({
+                    name: name, faction: possible.faction, role: chosen,
+                    defense: config.roles[chosen].defense || 0,
+                    dead: false});
                 rolesUsed[possible.faction][chosen] = true;
-            } else throw {faction: possible.faction,
+            } else throw {error: "No role choice possible",
+                          faction: possible.faction,
                           category: possible.category};
         });
 
@@ -108,6 +111,31 @@
                 result = list;
         });
         return result;
+    };
+
+    cyborg.apply = function(config, match) {
+        var victims = [], victim;
+        var infiltrators = [];
+        var attacker = undefined;
+
+        match.forEach(function(entry) {
+            if (entry.faction === 'infiltrator') {
+                infiltrators.push(entry);
+                if (entry.role === 'commander' && !attacker)
+                    attacker = entry;
+                else if (entry.role === 'assault')
+                    attacker = entry;
+            } else victims.push(entry);
+        });
+        if (!attacker && infiltrators.length) {
+            attacker = shuffle(infiltrators)[0];
+            attacker.role = 'assault';
+        }
+        if (attacker && victims.length) {
+            victim = shuffle(victims)[0];
+            if (victim.defense-- <= 0)
+                victim.dead = true;
+        }
     };
 
     cyborg.start = function($, callback) {

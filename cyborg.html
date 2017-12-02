@@ -5,12 +5,13 @@
  td { border: 1px solid black; }
  td.role { display: none; }
  th.role { display: none; }
+ .dead { color: red; }
 </style>
 
 <div id="header">
     <h1>Cyborg</h1>
 </div>
-<table id="roles">
+<table id="match">
 </table>
 <div id="footer"></div>
 
@@ -20,51 +21,94 @@
 <script>
  var cyborgData = {};
  var buttonage = false;
+ var match = [];
 
- var setRoles = function(list) {
+ var applyRoles = function(match) {
+     $('#match').empty();
+     $('#match').append(
+         '<tr><th>Name</th><th>Status</th><th class="role">Role</th>' +
+         '<th class="day"><button class="skip-d">Skip</button></th>' +
+         '<th class="night"><button class="skip-n">Skip</button></th>' +
+         '<th>Notes</th></tr>');
+     match.forEach(function(entry, index) {
+         var actionDay = entry.dead ? '' :
+                         ('<button class="vote" data-index="' +
+                          index + '">Vote</button>');
+         var actionNight = entry.dead ? '' :
+                           ('<button class="detect" data-index="' +
+                            index + '">Detect</button>');
+         var status = 'alive';
+
+         if (entry.dead) {
+             status = 'dead';
+             entry.info = entry.faction + ' ' + entry.role;
+         }
+         $('#match').append(
+             '<tr data-index="' + index + '"><td>' +
+             entry.name + '</td><td class="' + status  + '">' +
+             status + '</td><td class="role"> ' +
+             entry.faction + ' ' + entry.role +
+             '</td><td class="day">' + actionDay +
+             '</td><td class="night">' + actionNight +
+             '</td><td>' + (entry.info || '') + '</td></tr>');
+     });
+ };
+
+ var startMatch = function(list) {
      var nameSet = {};
      $('input[name="showroles"]').prop('checked', false);
-     $('#roles').empty();
-     $('#roles').append(
-         '<tr><th>Name</th><th class="role">Role</th>' +
-         '<th>Detected</th></tr>');
 
-     cyborg.createMatch(cyborgData, list).forEach(function(entry) {
-         $('#roles').append(
-             '<tr><td>' + entry.name + '</td><td class="role"> ' +
-             entry.faction + ' ' +  entry.role + '</td> ' +
-             '<td><button class="detect" class="detected" data-role="' +
-             entry.role + '" data-faction="' + entry.faction +
-             '">Detect</button></td></tr>');
-     });
+     match = cyborg.createMatch(cyborgData, list);
+     endDay();
+ };
+
+ var endDay = function() {
+     applyRoles(match);
+     $('.day').hide();
+     $('.night').show();
+ };
+
+ var endNight = function() {
+     cyborg.apply(cyborgData, match);
+
+     applyRoles(match);
+     $('.night').hide();
+     $('.day').show();
  };
 
  jQuery(function($) {
      $('#header').append('<select id="scenarios"></select>');
-     $('#header').append('<button name="generate">generate</button>');
+     $('#header').append('<button name="start">Restart</button>');
      $('#header').append(
          '<input name="showroles" type="checkbox" />Show Roles');
 
      var scenarios = $('#scenarios');
      scenarios.on('change', function(event) {
-         setRoles($(event.target).val());
+         startMatch($(event.target).val());
      });
-     $('button[name="generate"]').on('click', function(event) {
-         setRoles(scenarios.val());
+     $('button[name="start"]').on('click', function(event) {
+         startMatch(scenarios.val());
      });
      $('input[name="showroles"]').on('change', function(event) {
-         $('table td.role').toggle();
-         $('table th.role').toggle();
+         $('.role').toggle();
      });
-     $('table').on('click', 'button.detect', function(event) {
-         var target = $(event.target);
-         var list = cyborg.detect(
-             cyborgData, target.attr('data-role'));
-         var parent = target.parent();
-         parent.empty();
-         parent.append(list.join(', '));
-         console.log(list);
-     });
+
+     $('#match')
+         .on('click', 'button.skip-d', endDay)
+         .on('click', 'button.skip-n', endNight)
+         .on('click', 'button.vote', function(event) {
+             var target = $(event.target);
+             var entry = match[parseInt(target.attr('data-index'), 10)];
+             entry.dead = true;
+             entry.info = entry.faction + ' ' + entry.role;
+             applyRoles(match);
+             endDay(); })
+         .on('click', 'button.detect', function(event) {
+             var target = $(event.target);
+             var entry = match[parseInt(target.attr('data-index'), 10)];
+             entry.info = cyborg.detect(cyborgData, entry.role);
+             applyRoles(match);
+             endNight(); });
 
      cyborg.start($, function(data) {
          cyborgData = data;
@@ -76,7 +120,7 @@
                  scenario + '</option>');
          });
 
-         setRoles(scenarios.val());
+         startMatch(scenarios.val());
      });
 
  });
