@@ -23,6 +23,7 @@
 
  var setRoles = function(list) {
      var nameSet = {};
+     $('input[name="showroles"]').prop('checked', false);
      $('#roles').empty();
      $('#roles').append(
          '<tr><th>Name</th><th class="role">Role</th>' +
