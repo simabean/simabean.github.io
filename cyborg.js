@@ -114,12 +114,15 @@
     };
 
     cyborg.apply = function(config, match) {
+        var events = [];
         var victims = [], victim;
         var infiltrators = [];
         var attacker = undefined;
 
         match.forEach(function(entry) {
-            if (entry.faction === 'infiltrator') {
+            if (entry.dead) {
+                // Dead entries can't attack or be attacked
+            } else if (entry.faction === 'infiltrator') {
                 infiltrators.push(entry);
                 if (entry.role === 'commander' && !attacker)
                     attacker = entry;
@@ -133,9 +136,12 @@
         }
         if (attacker && victims.length) {
             victim = shuffle(victims)[0];
-            if (victim.defense-- <= 0)
+            if (victim.defense-- <= 0) {
                 victim.dead = true;
+                events.push("Infiltrators have killed " + victim.name);
+            }
         }
+        return events;
     };
 
     cyborg.start = function($, callback) {

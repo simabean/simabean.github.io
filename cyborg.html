@@ -3,8 +3,6 @@
 <style>
  h1 { display: inline-block; margin: 0; }
  td { border: 1px solid black; }
- td.role { display: none; }
- th.role { display: none; }
  .dead { color: red; }
 </style>
 
@@ -44,20 +42,23 @@
              entry.info = entry.faction + ' ' + entry.role;
          }
          $('#match').append(
-             '<tr data-index="' + index + '"><td>' +
+             '<tr data-index="' + index +
+             '"><td class="' + status + '">' +
              entry.name + '</td><td class="' + status  + '">' +
              status + '</td><td class="role"> ' +
              entry.faction + ' ' + entry.role +
              '</td><td class="day">' + actionDay +
              '</td><td class="night">' + actionNight +
-             '</td><td>' + (entry.info || '') + '</td></tr>');
+             '</td><td class="' + status + '">' + (entry.info || '') +
+             '</td></tr>');
      });
+
+     if ($('input[name="showroles"]').is(':checked'))
+         $('.role').show();
+     else $('.role').hide();
  };
 
  var startMatch = function(list) {
-     var nameSet = {};
-     $('input[name="showroles"]').prop('checked', false);
-
      match = cyborg.createMatch(cyborgData, list);
      endDay();
  };
@@ -90,9 +91,10 @@
          startMatch(scenarios.val());
      });
      $('input[name="showroles"]').on('change', function(event) {
-         $('.role').toggle();
+         if ($('input[name="showroles"]').is(':checked'))
+             $('.role').show();
+         else $('.role').hide();
      });
-
      $('#match')
          .on('click', 'button.skip-d', endDay)
          .on('click', 'button.skip-n', endNight)
@@ -109,7 +111,6 @@
              entry.info = cyborg.detect(cyborgData, entry.role);
              applyRoles(match);
              endNight(); });
-
      cyborg.start($, function(data) {
          cyborgData = data;
          scenarios.empty();
@@ -122,6 +123,5 @@
 
          startMatch(scenarios.val());
      });
-
  });
 </script>
