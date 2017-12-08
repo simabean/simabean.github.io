@@ -11,24 +11,29 @@
 </style>
 
 <div id="names"></div>
-<button name="generate">Generate</button>
 
 <script src="lib/revgram.js"></script>
 <script src="lib/jquery.min.js"></script>
 <script src="lib/jquery.mousewheel.js"></script>
 <script>//<![CDATA[
  jQuery(function($) {
-     $.getJSON('quintaquor.json', function(data) {
-         console.log(data);
-         var generate = function() {
-             var nameDiv = $('#names');
-             nameDiv.empty();
-             for (var ii = 0; ii < 10; ++ii)
-                 nameDiv.append(
-                     '<div>' + revgram.generate(data, 'name') +
-                     '</div>');
-         };
-         $('button[name="generate"]').on('click', generate);
-         generate();
-     });
+     var nameDiv = $('#names');
+
+     $.getJSON('./quintaquor.json')
+      .done(function(data) {
+          var generate = function() {
+              nameDiv.empty();
+              for (var ii = 0; ii < 10; ++ii)
+                  nameDiv.append(
+                      '<div>' + revgram.generate(
+                          data.randomNames, 'name') + '</div>');
+          };
+          generate();
+          $('<button name="generate">Generate</button>')
+              .on('click', generate)
+              .appendTo('body');
+      })
+      .fail(function(jqxhr, status, err) {
+          nameDiv.append('<p>' + status + ': ' + err + '</p>'); })
+      .always(function() { });
  }); //]]></script>
