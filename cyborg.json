@@ -164,14 +164,14 @@
             "comment": [
                 "Target one cyborg for a set of roles it might have, or try to determine their faction."],
             "categories": [
-                ["assault", "avenger", "berzerker"],
+                ["assault", "avenger", "overrider"],
                 ["detective", "interrogator", "vendetta", "sentry"],
                 ["suppressor", "medic", "guardian"],
-                ["console", "bosun", "commander", "protector"],
+                ["bosun", "commander", "protector"],
                 ["router", "hypnotist", "recycler"],
-                ["inquisitor", "overload", "pretender", "eavesdropper"],
-                ["blank", "stowaway"],
-		["grenadier", "bomber", "armorer"]]
+                ["overload", "eavesdropper", "console"],
+                ["blank", "stowaway", "pretender", "framed"],
+		["armorer", "bomber"]]
         },
         "sentry": {
             "category": "informative",
@@ -184,7 +184,8 @@
             "restriction": "loyalist",
             "category": "offense",
             "comment": [
-                "Target one cyborg and destroy one attacker, if any"]
+                "Target one cyborg and destroy one attacker, if any",
+				"The target will not be saved."]
         },
         "assault": {
             "category": "offense",
@@ -239,17 +240,15 @@
                 "Target one cyborg to sabotage or self to destroy ",
                 "all sabotaged targets, dealing 3 damage"]
         },
-	"grenadier": {
+	"overrider": {
             "restriction": "pirate",
-            "category": "offense",
+            "category": "pirate",
 	    "experimental": true,
             "defense": 3,
             "comment": [
-                "Sabatgoes someone and all their visitors at night.",
-                "When all non-pirates are sabotaged, everyone will ",
-		"take 3 damage. You know who is sabotaged, and if ",
-                "you visit a sabotaged person again, they will be ",
-		"spared. All their visitors will still be sabotaged."]
+                "Can attack someone at night.",
+                "May also possess someone,",
+		"stealing their body and killing them."]
         },
         "stowaway": {
             "restriction": "neutral",
