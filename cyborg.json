@@ -106,7 +106,7 @@
             },
             "justicar": { "any": 1 },
 	    "renegade": { "any": 1 },
-            "pirate": { "offense": 2 },
+            "pirate": { "pirate": 2 },
             "infiltrator": {
                 "commander": 1,
 		"assault": 1,
@@ -159,20 +159,13 @@
                 "Target one cyborg, and give them a point of defense.",
                 "This removes a point of your defense."]
         },
-        "inquisitor": {
-            "category": "informative",
-            "comment": [
-                "Target one cyborg and learn its loyalty. ",
-                "Doing so inverts the results for opposing agents ",
-                "and notifies the subject that they were interrogated."]
-        },
         "detective": {
             "category": "informative",
             "comment": [
-                "Target one cyborg for a set of roles it might have."],
+                "Target one cyborg for a set of roles it might have, or try to determine their faction."],
             "categories": [
                 ["assault", "avenger", "berzerker"],
-                ["detective", "interrogator", "vendetta", "scout"],
+                ["detective", "interrogator", "vendetta", "sentry"],
                 ["suppressor", "medic", "guardian"],
                 ["console", "bosun", "commander", "protector"],
                 ["router", "hypnotist", "recycler"],
@@ -180,7 +173,7 @@
                 ["blank", "stowaway"],
 		["grenadier", "bomber", "armorer"]]
         },
-        "scout": {
+        "sentry": {
             "category": "informative",
 	    "restriction": "loyalist",
             "comment": [
@@ -231,7 +224,7 @@
         },
         "berzerker": {
             "restriction": "pirate",
-            "category": "offense",
+            "category": "pirate",
             "unique": true,
             "defense": 3,
             "comment": [
@@ -240,7 +233,7 @@
         },
         "bomber": {
             "restriction": "pirate",
-            "category": "offense",
+            "category": "pirate",
             "defense": 3,
             "comment": [
                 "Target one cyborg to sabotage or self to destroy ",
@@ -279,10 +272,10 @@
             "category": "neutral",
             "defense": 0,
             "comment": [
-                "Receive a random target at the start of the game.",
-                "Keep them alive to win.  You can roleblock all your ",
-		"target's visitors. You must wait two nights after ",
-		"using this to use it again."]
+                "Receive a random target. You win if they survive.",
+                "You may not have vendetta or overload as your target.",
+		"You may pick a second target once. This must be done the day following your target's death.",
+		"You may protect your target for the cycle, making them immune to attacks. 4 uses."]
         },
         "hypnotist": {
             "defense": 1,
@@ -298,7 +291,7 @@
             "category": "malefactor",
             "restriction": "malefactor",
             "comment": [
-                "Win only if a specific loyalist (other than bosun) ",
+                "Win only if a specific loyalist (other than bosun)",
                 "is executed or if that loyalist is killed and loses"]
         },
         "overload": {
