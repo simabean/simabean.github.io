@@ -171,7 +171,7 @@
                 ["router", "hypnotist", "recycler"],
                 ["overload", "eavesdropper", "console"],
                 ["blank", "stowaway", "pretender", "framed"],
-		["armorer", "bomber"]]
+		["armorer", "berzerker"]]
         },
         "sentry": {
             "category": "informative",
@@ -231,14 +231,6 @@
             "comment": [
                 "Target one cyborg and attack with all visitors, ",
                 "dealing 3 damage"]
-        },
-        "bomber": {
-            "restriction": "pirate",
-            "category": "pirate",
-            "defense": 3,
-            "comment": [
-                "Target one cyborg to sabotage or self to destroy ",
-                "all sabotaged targets, dealing 3 damage"]
         },
 	"overrider": {
             "restriction": "pirate",
