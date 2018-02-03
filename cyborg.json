@@ -44,6 +44,12 @@
                 "infiltrators and loyalists are dead",
 		"All pirates know the identities of other pirates."]
         },
+		"virus": {
+            "comment": [
+                "At least one virus must be alive while all ",
+                "pirates and loyalists are dead",
+		"Virus have private night chat."]
+        },
         "neutral": {
             "comment": [
                 "Uncommitted to any faction"]
@@ -61,7 +67,7 @@
                 "Usually hostile to pirates"]
         }
     },
-    "scenarioDefault": "pirate",
+    "scenarioDefault": "standard",
     "scenarios": {
         "small": {
             "loyalist": {
@@ -75,15 +81,15 @@
             "malefactor": { "malefactor": 1 },
             "infiltrator": {
                 "commander": 1,
-		"assault": 1
+		"soldier": 1
             }
         },
-        "medium": {
+        "standard": {
             "loyalist": {
                 "console": 1,
                 "protective": 1,
                 "support": 2,
-                "informative": 2,
+                "informative": 3,
                 "offense": 1,
                 "any": 2
             },
@@ -91,26 +97,53 @@
             "pirate": { "pirate": 1 },
             "infiltrator": {
                 "commander": 1,
-		"assault": 1,
-                "any": 1
+		"soldier": 1,
+                "any": 2
             }
         },
-	"pirate": {
+	"chaos": {
             "loyalist": {
                 "console": 1,
-                "protective": 2,
-                "support": 1,
-                "informative": 2,
-                "offense": 1,
-                "any": 1
+                "any": 9
             },
             "justicar": { "any": 1 },
 	    "renegade": { "any": 1 },
-            "pirate": { "pirate": 2 },
+            "pirate": { "pirate": 1 },
             "infiltrator": {
                 "commander": 1,
-		"assault": 1,
                 "any": 2
+            }
+        },
+		"virus": {
+            "loyalist": {
+                "console": 1,
+                "any": 9
+            },
+            "pirate": { "pirate": 1 },
+            "virus": {
+                "virus": 1
+            }
+        },
+		"skill": {
+            "loyalist": {
+                "console": 1,
+                "medic": 1,
+                "suppressor": 1,
+				"bosun": 1,
+                "detective": 1,
+				"sentry": 1,
+				"interrogator": 1,
+                "soldier": 1,
+				"router": 1,
+                "any": 1
+            },
+            "malefactor": { "vendetta": 1 },
+            "pirate": { "berzerker": 1 },
+            "infiltrator": {
+                "commander": 1,
+				"soldier": 1,
+                "suppressor": 1,
+				"pretender": 1
             }
         }
     },
@@ -164,13 +197,13 @@
             "comment": [
                 "Target one cyborg for a set of roles it might have, or try to determine their faction."],
             "categories": [
-                ["assault", "avenger", "overrider"],
+                ["soldier", "avenger", "overrider"],
                 ["detective", "interrogator", "vendetta", "sentry"],
                 ["suppressor", "medic", "guardian"],
                 ["bosun", "commander", "protector"],
                 ["router", "hypnotist", "recycler"],
                 ["overload", "eavesdropper", "console"],
-                ["blank", "stowaway", "pretender", "framed"],
+                ["blank", "stowaway", "pretender"],
 		["armorer", "berzerker"]]
         },
         "sentry": {
@@ -187,7 +220,7 @@
                 "Target one cyborg and destroy one attacker, if any",
 				"The target will not be saved."]
         },
-        "assault": {
+        "soldier": {
             "category": "offense",
             "comment": [
                 "Target one cyborg to attack unless commanded"]
@@ -218,10 +251,12 @@
                 "and if killed"]
         },
         "eavesdropper": {
-            "restriction": "infiltrator",
-	    "category": "support",
+	    "category": "informative",
             "comment": [
-                "Able to read whispers"]
+                "Able to read whispers to and from their target ",
+				"During the charging cycle.",
+				"Whispers to and from this function are hidden from the public, ",
+				"excluding eavesdroppers who target either person."]
         },
         "berzerker": {
             "restriction": "pirate",
@@ -303,6 +338,17 @@
                 "Use the ability of a uploaded cyborg on someone.",
                 "Use each function only once.",
                 "Win only if loyalists lose."]
+        },
+		"virus": {
+            "defense": 2,
+            "category": "virus",
+            "restriction": "virus",
+			"experimental": true,
+            "comment": [
+                "Turn somebody into a virus.",
+                "Whoever the most viruses ",
+                "target will be converted.",
+				"Four uses."]
         }
     }
 }
