@@ -1,86 +1,65 @@
 {
     "notes": [
         "http://stackoverflow.com/questions/2271704/family-tree-layout-with-dot-graphviz"],
-    "races": {
-        "human": {
-            "domain": "elemental"
+    "gods": {
+        "Tenaea": {
+            "domain": "Order"
         },
-        "viator": {
-            "domain": "gate"
+        "Orma": {
+            "domain": "Form"
         },
-        "galrar": {
-            "domain": "sorcery"
+        "Arcon": {
+            "domain": "Heat"
         },
-        "orcspork": {
-            "domain": "life"
+        "Tirasil": {
+            "domain": "Life"
         },
-        "deuron": {
-            "domain": "death"
+        "Senon": {
+            "domain": "Existence"
         }
     },
     "people": {
-        "Sarah Zarin": {
-            "house": "Zarin",
-            "gender": "female",
+        "Centas": {
+            "house": "Roard",
+            "gender": "Male",
             "race": "human",
-            "spouses": [
+            "family": [
                 {
-                    "spouse": "Peter Mosshall",
-                    "children": [
-                        "Janet",
-                        "Valter",
-                        "Bess",
-                        "Alain"
+                    "cousins": [
+                        "Alarus",
+                        "Cenassa",
+                        "Alys",
+                        "Lernus",
+						"Zanar"
                     ]}]},
-        "Peter Mosshall": {
-            "house": "Mosshall",
-            "gender": "male",
-            "race": "human",
-            "spouses": [{"spouse": "Sarah Zarin"}]},
-        "Janet Zarin": {
-            "house": "Zarin",
-            "gender": "female",
-            "race": "human",
-            "spouses": [
-            ]},
-        "Valter Zarin": {
-            "house": "Zarin",
-            "gender": "male",
-            "race": "human",
-            "spouses": [
-            ]},
-        "Bess Zarin": {
-            "house": "Zarin",
-            "gender": "female",
-            "race": "",
-            "spouses": [
-            ]},
-        "Alain": {
-            "house": "Zarin",
-            "gender": "male",
-            "race": "human",
-            "spouses": [
-            ]},
-        "": {
-            "house": "",
-            "gender": "",
-            "race": "",
-            "spouses": [
-            ]}
     },
     "randomNames": {
         "name": [["%redcouncil"]],
-        "redcouncil": [["%male", " (male)"],
-                       ["%female", " (female)"]],
-        "male": [[5, "%mpre", "%msfx"], ["%mpre", "%mmid", "%msfx"]],
-        "female": [[5, "%fpre", "%fsfx"], ["%fpre", "%fmid", "%fsfx"]],
+        "redcouncil": [["%rcmale", " (male)"],
+                       ["%rcfemale", " (female)"]],
+        "rcmale": [[5, "%rcmpre", "%rcmsfx"], ["%rcmpre", "%rcmmid", "%rcmsfx"]],
+        "rcfemale": [[5, "%rcfpre", "%rcfsfx"], ["%rcfpre", "%rcfmid", "%rcfsfx"]],
 
-        "mpre": ["Alls", "Bas", "C", "Deen", "Gh", "Hals", "Kas", "Rh"],
-        "mmid": ["il", "ar", "en"],
-        "msfx": ["yr", "ynder", "yl", "yel", "ys", "iro", "iric", "im"],
+        "rcmpre": ["Alls", "Bas", "C", "Deen", "Gh", "Hals", "Kas", "Rh"],
+        "rcmmid": ["il", "ar", "en"],
+        "rcmsfx": ["yr", "ynder", "yl", "yel", "ys", "iro", "iric", "im"],
 
-        "fpre": ["Alesn", "Astr", "Cysan", "Fay", "Gil", "Kyth", "Nal"],
-        "fmid": ["ay", "ri", "ei"],
-        "fsfx": ["aea", "an", "ran", "ia", "dra"]
+        "rcfpre": ["Alesn", "Astr", "Cysan", "Fay", "Gil", "Kyth", "Nal"],
+        "rcfmid": ["ay", "ri", "ei"],
+        "rcfsfx": ["aea", "an", "ran", "ia", "dra"]
+		
+		"kantis": [["%kmale", " (male)"],
+                       ["%kfemale", " (female)"]],
+		
+		"kmale": [[5, "%kmpre", "%kmsfx"], ["%kmpre", "%kmmid", "%kmsfx"]],
+        "kfemale": [[5, "%kfpre", "%kfsfx"], ["%kfpre", "%kfmid", "%kcfsfx"]],
+		
+		"kmpre": ["Al", "Cen", "Lern", "Zan"],
+        "kmmid": ["ar"],
+        "kmsfx": ["us", "tas", "ar"],
+
+        "kfpre": ["Cen"],
+        "kfmid": ["placeholder"],
+        "kfsfx": ["assa"]
     }
 }
