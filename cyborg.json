@@ -202,7 +202,7 @@
                 ["suppressor", "medic", "guardian"],
                 ["bosun", "commander", "protector"],
                 ["router", "hypnotist", "recycler"],
-                ["overload", "eavesdropper", "console"],
+                ["overload", "eavesdropper", "console", "virus"],
                 ["blank", "stowaway", "pretender"],
 		["armorer", "berzerker"]]
         },
@@ -345,10 +345,11 @@
             "restriction": "virus",
 			"experimental": true,
             "comment": [
-                "Turn somebody into a virus.",
-                "Whoever the most viruses ",
-                "target will be converted.",
-				"Four uses."]
+                "Target someone at night. ",
+                "They may choose to convert to virus ",
+                "or die. They can't speak until they choose. ",
+				"If they choose death, they die immediately, ",
+				"enter dead chat and appear dead the next day."]
         }
     }
 }
