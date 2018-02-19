@@ -25,10 +25,10 @@
     cyborg.createMatch = function(config, scenarioName) {
         var result = [];
         var possibles = [];
-        var scenario = config.scenarios[
-            scenarioName || config.scenarioDefault];
         var rolesUsed = {};
         var namesUsed = {};
+        var scenario = config.scenarios[
+            scenarioName || config.scenarioDefault];
 
         // Build a list of possible roles for each position
         Object.keys(scenario).forEach(function(faction) {
@@ -38,7 +38,8 @@
                 var count = scenario[faction][category];
                 var current;
 
-                while (count-- > 0) {
+                for (var count = scenario[faction][category];
+                    count > 0; --count) {
                     current = {faction: faction, category: category,
                                roles: []};
                     possibles.push(current);
@@ -126,7 +127,7 @@
                 infiltrators.push(entry);
                 if (entry.role === 'commander' && !attacker)
                     attacker = entry;
-                else if (entry.role === 'assault')
+                else if (entry.role === 'soldier')
                     attacker = entry;
             } else victims.push(entry);
         });
