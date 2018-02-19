@@ -133,7 +133,7 @@
         });
         if (!attacker && infiltrators.length) {
             attacker = shuffle(infiltrators)[0];
-            attacker.role = 'assault';
+            attacker.role = 'soldier';
         }
         if (attacker && victims.length) {
             victim = shuffle(victims)[0];
