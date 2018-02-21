@@ -47,7 +47,8 @@
                     Object.keys(config.roles).forEach(function(roleName) {
                         var role = config.roles[roleName];
 
-                        if ((category === 'any' ||
+                        if (!role.experimental &&
+                            (category === 'any' ||
                              category === role['category'] ||
                              category === roleName) &&
                             (!role['restriction'] ||
