@@ -44,7 +44,7 @@
                 "infiltrators and loyalists are dead",
 		"All pirates know the identities of other pirates."]
         },
-		"virus": {
+	"virus": {
             "comment": [
                 "At least one virus must be alive while all ",
                 "pirates and loyalists are dead",
@@ -114,7 +114,7 @@
                 "any": 2
             }
         },
-		"virus": {
+	"virus": {
             "loyalist": {
                 "console": 1,
                 "any": 9
@@ -124,28 +124,60 @@
                 "virus": 1
             }
         },
-		"skill": {
+	"skill": {
             "loyalist": {
                 "console": 1,
                 "medic": 1,
                 "suppressor": 1,
-				"bosun": 1,
+		"bosun": 1,
                 "detective": 1,
-				"sentry": 1,
-				"interrogator": 1,
+		"sentry": 1,
+		"interrogator": 1,
                 "soldier": 1,
-				"router": 1,
+		"router": 1,
                 "any": 1
             },
             "malefactor": { "vendetta": 1 },
             "pirate": { "berzerker": 1 },
             "infiltrator": {
                 "commander": 1,
-				"soldier": 1,
+		"soldier": 1,
                 "suppressor": 1,
-				"pretender": 1
+		"pretender": 1
             }
         }
+    },
+    "abilities": {
+        "attack": {"cycle": "rest"},
+        "rampage": {"cycle": "rest", "charge": 1},
+        "convert": {"cycle": "rest"},
+        "download": {"cycle": "rest", "priority": -1},
+        "order": {"cycle": "rest"},
+        "impersonate": {"cycle": "rest"},
+        "hypnotize": {"cycle": "rest", "priority": 2},
+        "rampage": {"cycle": "rest"},
+        "interrogate": {"cycle": "main", "votes": 2, "reveal": true},
+        "login": {"cycle": "main", "votes": 2, "reveal": true},
+        "suppress": {"cycle": "rest", "priority": 1},
+        "relocate": {"cycle": "rest", "priority": 3},
+        "recycle": {"cycle": "rest", "priority": 3},
+        "heal": {"cycle": "rest"},
+        "guard": {"cycle": "rest"},
+        "avenge": {"cycle": "rest"},
+        "follow": {"cycle": "rest"},
+        "bug": {"cycle": "rest"},
+        "scan": {"cycle": "rest"},
+        "detect": {
+            "cycle": "rest",
+            "categories": [
+                ["soldier", "avenger", "overrider"],
+                ["detective", "interrogator", "vendetta", "sentry"],
+                ["suppressor", "medic", "guardian"],
+                ["bosun", "commander", "protector"],
+                ["router", "hypnotist", "recycler"],
+                ["overload", "eavesdropper", "console", "virus"],
+                ["blank", "stowaway", "pretender"],
+		["armorer", "berzerker"]]}
     },
     "roles": {
         "console": {
@@ -161,11 +193,13 @@
             "restriction": "loyalist",
             "category": "support",
             "unique": true,
+            "abilities": [{"type": "login"}],
             "comment": [
-                "Can reveal during day and get 3 votes"]
+                "Can reveal during day and get 2 votes"]
         },
         "suppressor": {
             "category": "support",
+            "abilities": [{"type": "supress"}],
             "comment": [
                 "Target one cyborg and prevent it from acting.",
                 "This role cannot be surppressed."]
@@ -173,12 +207,14 @@
         "medic": {
             "restriction": "loyalist",
             "category": "protective",
+            "abilities": [{"type": "heal"}],
             "comment": [
                 "Target one cybrog and repair it if attacked"]
         },
-        "protector": {
+        "guard": {
             "restriction": "loyalist",
             "category": "protective",
+            "abilities": [{"type": "guard"}],
             "comment": [
                 "Target one cyborg, who is protected, and destroy one ",
                 "attacker at the cost of your own life"]
@@ -186,6 +222,7 @@
 	"armorer": {
             "restriction": "loyalist",
             "category": "protective",
+            "abilities": [{"type": "armor"}],
 	    "experimental": true,
 	    "defense": 2,
             "comment": [
@@ -194,21 +231,14 @@
         },
         "detective": {
             "category": "informative",
+            "abilities": [{"type": "detect"}],
             "comment": [
-                "Target one cyborg for a set of roles it might have, or try to determine their faction."],
-            "categories": [
-                ["soldier", "avenger", "overrider"],
-                ["detective", "interrogator", "vendetta", "sentry"],
-                ["suppressor", "medic", "guardian"],
-                ["bosun", "commander", "protector"],
-                ["router", "hypnotist", "recycler"],
-                ["overload", "eavesdropper", "console", "virus"],
-                ["blank", "stowaway", "pretender"],
-		["armorer", "berzerker"]]
+                "Target one cyborg for a set of roles it might have, or try to determine their faction."]
         },
         "sentry": {
-            "category": "informative",
 	    "restriction": "loyalist",
+            "category": "informative",
+            "abilities": [{"type": "follow"}],
             "comment": [
                 "Target one cyborg and see all who visit as well as ",
                 "all notifications that cyborg receives."]
@@ -216,12 +246,14 @@
         "avenger": {
             "restriction": "loyalist",
             "category": "offense",
+            "abilities": [{"type": "avenge"}],
             "comment": [
                 "Target one cyborg and destroy one attacker, if any",
-				"The target will not be saved."]
+		"The target will not be saved."]
         },
         "soldier": {
             "category": "offense",
+            "abilities": [{"type": "attack"}],
             "comment": [
                 "Target one cyborg to attack unless commanded"]
         },
@@ -230,6 +262,7 @@
             "restriction": "infiltrator",
             "unique": true,
             "defense": 2,
+            "abilities": [{"type": "order"}],
             "comment": [
                 "Target one cyborg to attack, unless one or more ",
                 "unsuppressed friendly assault roles exist (in which ",
@@ -239,6 +272,7 @@
             "unique": true,
             "restriction": "loyalist",
 	    "category": "support",
+            "abilities": [{"type": "relocate"}],
             "comment": [
                 "Target two cyborgs - attempts to visit one will ",
                 "visit the other and vice versa."]
@@ -246,23 +280,26 @@
         "pretender": {
             "restriction": "infiltrator",
 	    "category": "support",
+            "abilities": [{"type": "impersonate"}],
             "comment": [
                 "Target one cyborg - assume its role for detectives ",
                 "and if killed"]
         },
         "eavesdropper": {
 	    "category": "informative",
+            "abilities": [{"type": "bug"}],
             "comment": [
                 "Able to read whispers to and from their target ",
-				"During the charging cycle.",
-				"Whispers to and from this function are hidden from the public, ",
-				"excluding eavesdroppers who target either person."]
+                "during the rest cycle.  Whispers to and from ",
+                "this function are hidden from the public, ",
+                "excluding eavesdroppers who target either person."]
         },
         "berzerker": {
             "restriction": "pirate",
             "category": "pirate",
             "unique": true,
             "defense": 3,
+            "abilities": [{"type": "rampage"}],
             "comment": [
                 "Target one cyborg and attack with all visitors, ",
                 "dealing 3 damage"]
@@ -272,6 +309,7 @@
             "category": "pirate",
 	    "experimental": true,
             "defense": 3,
+            "abilities": [{"type": "attack"}, {"type": "override"}],
             "comment": [
                 "Can attack someone at night.",
                 "May also possess someone,",
@@ -288,6 +326,7 @@
             "restriction": "neutral",
             "category": "neutral",
             "defense": 1,
+            "abilities": [{"type": "download"}],
             "comment": [
                 "Target one uploaded cyborg to assume that role ",
                 "and loyalty and win conditions"]
@@ -307,6 +346,7 @@
             "defense": 1,
             "category": "malefactor",
             "restriction": "malefactor",
+            "abilities": [{"type": "hypnotize"}],
             "comment": [
                 "Target two cyborgs - the first will use its ability ",
                 "on the second if possible.  You will learn the role ",
@@ -334,22 +374,24 @@
             "category": "malefactor",
             "restriction": "malefactor",
 	    "experimental": true,
+            "abilities": [{"type": "recycle"}],
             "comment": [
                 "Use the ability of a uploaded cyborg on someone.",
                 "Use each function only once.",
                 "Win only if loyalists lose."]
         },
-		"virus": {
+	"virus": {
             "defense": 2,
             "category": "virus",
             "restriction": "virus",
-			"experimental": true,
+	    "experimental": true,
+            "abilities": [{"type": "convert"}],
             "comment": [
                 "Target someone at night. ",
                 "They may choose to convert to virus ",
                 "or die. They can't speak until they choose. ",
-				"If they choose death, they die immediately, ",
-				"enter dead chat and appear dead the next day."]
+		"If they choose death, they die immediately, ",
+		"enter dead chat and appear dead the next day."]
         }
     }
 }

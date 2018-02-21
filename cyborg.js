@@ -99,7 +99,7 @@
     };
 
     cyborg.detect = function(config, role) {
-        var categories = config.roles.detective.categories;
+        var categories = config.abilities.detect.categories;
         var result = [];
 
         categories.forEach(function(list) {
