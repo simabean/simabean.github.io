@@ -4,6 +4,7 @@
  h1 { display: inline-block; margin: 0; }
  td { border: 1px solid black; }
  .dead { color: red; }
+ #cycle { padding-left: 1em; padding-right: 1em }
 </style>
 
 <div id="header">
@@ -57,23 +58,50 @@
      else $('.role').hide();
  };
 
- var startMatch = function(list) {
-     match = cyborg.createMatch(cyborgData, list);
-     endDay();
+ var mainClock = 0;
+ var restClock = 0;
+ var timer = 0;
+ var clockTick = function() {
+     if (mainClock) {
+         if (!--mainClock)
+             endMainCycle();
+         $('#clock').text(mainClock);
+     } else if (restClock) {
+         if (!--restClock)
+             endRestCycle();
+         $('#clock').text(restClock);
+     }
+     setTimeout(clockTick, 1000);
  };
 
- var endDay = function() {
+ var startMatch = function(list) {
+     if (timer)
+         clearTimeout(timer);
+     match = cyborg.createMatch(cyborgData, list);
+     endMainCycle();
+     setTimeout(clockTick, 1000);
+ };
+
+ var endMainCycle = function() {
      applyRoles(match);
      $('.day').hide();
      $('.night').show();
+
+     restClock = 30;
+     $('#clock').text(restClock);
+     $('#cycle').text('REST');
  };
 
- var endNight = function() {
+ var endRestCycle = function() {
      cyborg.apply(cyborgData, match);
 
      applyRoles(match);
      $('.night').hide();
      $('.day').show();
+
+     mainClock = 30;
+     $('#clock').text(mainClock);
+     $('#cycle').text('MAIN');
  };
 
  jQuery(function($) {
@@ -81,6 +109,8 @@
      $('#header').append('<button name="start">Restart</button>');
      $('#header').append(
          '<input name="showroles" type="checkbox" />Show Roles');
+     $('#header').append(
+         '<span id="cycle"></span><span id="clock"></span>')
 
      var scenarios = $('#scenarios');
      scenarios.on('change', function(event) {
@@ -95,21 +125,21 @@
          else $('.role').hide();
      });
      $('#match')
-         .on('click', 'button.skip-d', endDay)
-         .on('click', 'button.skip-n', endNight)
+         .on('click', 'button.skip-d', endMainCycle)
+         .on('click', 'button.skip-n', endRestCycle)
          .on('click', 'button.vote', function(event) {
              var target = $(event.target);
              var entry = match[parseInt(target.attr('data-index'), 10)];
              entry.dead = true;
              entry.info = entry.faction + ' ' + entry.role;
              applyRoles(match);
-             endDay(); })
+             endMainCycle(); })
          .on('click', 'button.detect', function(event) {
              var target = $(event.target);
              var entry = match[parseInt(target.attr('data-index'), 10)];
              entry.info = cyborg.detect(cyborgData, entry.role);
              applyRoles(match);
-             endNight(); });
+             endRestCycle(); });
      cyborg.start($, function(data) {
          cyborgData = data;
          scenarios.empty();
