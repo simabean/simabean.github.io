@@ -174,11 +174,11 @@
                 ["soldier", "avenger", "overrider"],
                 ["detective", "interrogator", "vendetta", "sentry"],
                 ["suppressor", "medic", "guardian"],
-                ["bosun", "commander", "guard"],
+                ["bosun", "commander"],
                 ["router", "hypnotist", "recycler"],
                 ["overload", "eavesdropper", "console", "virus"],
                 ["blank", "stowaway", "pretender"],
-		["armorer", "berzerker"]]}
+		["guard", "berzerker", "armorer"]]}
     },
     "roles": {
         "console": {
