@@ -55,6 +55,10 @@
             "comment": [
                 "Uncommitted to any faction"]
         },
+		"rogue": {
+            "comment": [
+                "Must pursue their own personal objective"]
+        },
         "malefactor": {
             "comment": [
                 "Usually hostile to loyalists"]
@@ -94,7 +98,7 @@
                 "offense": 1,
                 "any": 2
             },
-            "malefactor": { "malefactor": 1 },
+            "rogue": { "rogue": 1 },
             "pirate": { "pirate": 1 },
             "infiltrator": {
                 "commander": 1,
@@ -120,9 +124,10 @@
                 "console": 1,
                 "any": 9
             },
+			"rogue": { "any": 1 },
             "pirate": { "pirate": 1 },
             "virus": {
-                "virus": 1
+                "stable virus": 4
             }
         },
 	"skill": {
@@ -138,7 +143,7 @@
 		"router": 1,
                 "any": 1
             },
-            "malefactor": { "vendetta": 1 },
+            "rogue": { "vendetta": 1 },
             "pirate": { "berzerker": 1 },
             "infiltrator": {
                 "commander": 1,
@@ -152,6 +157,7 @@
         "attack": {"cycle": "rest"},
         "rampage": {"cycle": "rest", "charge": 1},
         "convert": {"cycle": "rest"},
+		"charge": {"cycle": "rest", "charge": 2},
         "download": {"cycle": "rest", "priority": -1},
         "order": {"cycle": "rest"},
         "impersonate": {"cycle": "rest"},
@@ -311,11 +317,11 @@
             "category": "pirate",
 	    "experimental": true,
             "defense": 3,
-            "abilities": [{"type": "attack"}, {"type": "override"}],
+            "abilities": [{"type": "attack"}, {"type": "charge"}],
             "comment": [
                 "Can attack someone at night.",
-                "May also possess someone,",
-		"stealing their body and killing them."]
+                "May also charge someone",
+		"killing all of their visitors."]
         },
         "stowaway": {
             "restriction": "neutral",
@@ -356,16 +362,16 @@
         },
         "vendetta": {
             "defense": 1,
-            "category": "malefactor",
-            "restriction": "malefactor",
+            "category": "rogue",
+            "restriction": "rogue",
             "comment": [
                 "Win only if a specific loyalist (other than bosun)",
                 "is executed or if that loyalist is killed and loses"]
         },
         "overload": {
             "defense": 1,
-            "category": "malefactor",
-            "restriction": "malefactor",
+            "category": "rogue",
+            "restriction": "rogue",
             "comment": [
                 "When executed target one guilty judge to be ",
                 "overloaded or one will be chosen automatically. ",
@@ -382,18 +388,34 @@
                 "Use each function only once.",
                 "Win only if loyalists lose."]
         },
-	"virus": {
-            "defense": 2,
-            "category": "virus",
+	"stable virus": {
+            "defense": 0,
+            "category": "offense",
             "restriction": "virus",
 	    "experimental": true,
             "abilities": [{"type": "convert"}],
             "comment": [
                 "Target someone at night. ",
-                "They may choose to convert to virus ",
-                "or die. They can't speak until they choose. ",
-		"If they choose death, they die immediately, ",
-		"enter dead chat and appear dead the next day."]
+                "The virus dead for the longest will ",
+                "take over their body as an unstable virus",
+				"the next day. If no viruses are dead,",
+				"a random virus will take the body,",
+				"killing their old one."]
+        },
+	"unstable virus": {
+            "defense": 0,
+            "category": "offense",
+            "restriction": "virus",
+	    "experimental": true,
+            "abilities": [{"type": "convert"}],
+            "comment": [
+                "Target someone at night. ",
+                "The virus dead for the longest will ",
+                "take over their body as an unstable virus",
+				"the next day. If no viruses are dead,",
+				"a random virus will take the body,",
+				"killing their old one.",
+				"You will die tonight."]
         }
     }
 }
