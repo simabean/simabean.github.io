@@ -157,7 +157,6 @@
         "attack": {"cycle": "rest"},
         "rampage": {"cycle": "rest", "charge": 1},
         "convert": {"cycle": "rest"},
-		"charge": {"cycle": "rest", "charge": 2},
         "download": {"cycle": "rest", "priority": -1},
         "order": {"cycle": "rest"},
         "impersonate": {"cycle": "rest"},
@@ -165,6 +164,7 @@
         "rampage": {"cycle": "rest"},
         "interrogate": {"cycle": "main", "votes": 2, "reveal": true},
         "login": {"cycle": "main", "votes": 2, "reveal": true},
+		"seek allies": {"cycle": "rest"},
         "suppress": {"cycle": "rest", "priority": 1},
         "relocate": {"cycle": "rest", "priority": 3},
         "recycle": {"cycle": "rest", "priority": 3},
@@ -339,16 +339,17 @@
                 "Target one uploaded cyborg to assume that role ",
                 "and loyalty and win conditions"]
         },
-	"guardian": {
-            "restriction": "neutral",
+	"mercenary": {
+            "restriction": "rogue",
 	    "experimental": true,
-            "category": "neutral",
+            "category": "rogue",
             "defense": 0,
             "comment": [
                 "Receive a random target. You win if they survive.",
-                "You may not have vendetta or overload as your target.",
-		"You may pick a second target once. This must be done the day following your target's death.",
-		"You may protect your target for the cycle, making them immune to attacks. 4 uses."]
+                "Your target must be a Loyalist or Infiltrator, and cannot be a Guard.",
+		"If your target dies, you may pick a new one within the first 3 days.",
+		"You may protect your target for the cycle, making them immune to attacks.",
+		"You can check someone to see if they are an ally of your target during the rest cycle."]
         },
         "hypnotist": {
             "defense": 1,
