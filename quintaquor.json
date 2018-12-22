@@ -1,6 +1,7 @@
 {
     "notes": [
-        "http://stackoverflow.com/questions/2271704/family-tree-layout-with-dot-graphviz"],
+        "http://stackoverflow.com/questions/2271704/",
+        "family-tree-layout-with-dot-graphviz"],
     "gods": {
         "Tenaea": {
             "domain": "Order"
@@ -30,15 +31,17 @@
                         "Cenassa",
                         "Alys",
                         "Lernus",
-						"Zanar"
-                    ]}]},
+			"Zanar"
+                    ]}]}
     },
     "randomNames": {
         "name": [["%redcouncil"]],
         "redcouncil": [["%rcmale", " (male)"],
                        ["%rcfemale", " (female)"]],
-        "rcmale": [[5, "%rcmpre", "%rcmsfx"], ["%rcmpre", "%rcmmid", "%rcmsfx"]],
-        "rcfemale": [[5, "%rcfpre", "%rcfsfx"], ["%rcfpre", "%rcfmid", "%rcfsfx"]],
+        "rcmale": [[5, "%rcmpre", "%rcmsfx"],
+                   ["%rcmpre", "%rcmmid", "%rcmsfx"]],
+        "rcfemale": [[5, "%rcfpre", "%rcfsfx"],
+                     ["%rcfpre", "%rcfmid", "%rcfsfx"]],
 
         "rcmpre": ["Alls", "Bas", "C", "Deen", "Gh", "Hals", "Kas", "Rh"],
         "rcmmid": ["il", "ar", "en"],
@@ -46,15 +49,15 @@
 
         "rcfpre": ["Alesn", "Astr", "Cysan", "Fay", "Gil", "Kyth", "Nal"],
         "rcfmid": ["ay", "ri", "ei"],
-        "rcfsfx": ["aea", "an", "ran", "ia", "dra"]
+        "rcfsfx": ["aea", "an", "ran", "ia", "dra"],
 		
-		"kantis": [["%kmale", " (male)"],
-                       ["%kfemale", " (female)"]],
+	"kantis": [["%kmale", " (male)"],
+                   ["%kfemale", " (female)"]],
 		
-		"kmale": [[5, "%kmpre", "%kmsfx"], ["%kmpre", "%kmmid", "%kmsfx"]],
+	"kmale": [[5, "%kmpre", "%kmsfx"], ["%kmpre", "%kmmid", "%kmsfx"]],
         "kfemale": [[5, "%kfpre", "%kfsfx"], ["%kfpre", "%kfmid", "%kcfsfx"]],
-		
-		"kmpre": ["Al", "Cen", "Lern", "Zan"],
+
+	"kmpre": ["Al", "Cen", "Lern", "Zan"],
         "kmmid": ["ar"],
         "kmsfx": ["us", "tas", "ar"],
 
