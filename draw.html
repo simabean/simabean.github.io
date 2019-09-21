@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<title>Draw</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<style>
+ html, body
+ { position: absolute; padding: 0; margin: 0; overflow: hidden;  }
+</style>
+<script src="lib/ripple/polyfill.js"></script>
+<script src="lib/ripple/multivec.js"></script>
+<script src="lib/ripple/fascia.js"></script>
+<script src="lib/ripple/ripple.js"></script>
+<script>//<![CDATA[
+ "use strict";
+ var number = parseInt(ripple.param('number'), 10) || undefined;
+ var example = ripple.param('example');
+
+ var polygons = [{
+     vertices: [
+         {x: 0.25, y: 0.25},
+         {x: 0.40, y: 0.25},
+         {x: 0.40, y: 0.40} ]
+ }, {
+     vertices: [
+         {x: 0.6, y: 0.2},
+         {x: 0.9, y: 0.2},
+         {x: 0.9, y: 0.5},
+         {x: 0.6, y: 0.5} ]
+ }];
+
+     var adjust = function(polygon, width, height) {
+         return polygon.map(function(point) {
+             return { x: (point.x - 0.5) * width,
+                      y: (point.y - 0.5) * height }; });
+     }
+
+     var drawPolygon = function(ctx, vertices) {
+         if (vertices.length > 0) {
+             var last = vertices[vertices.length - 1];
+             ctx.moveTo(last.x, last.y);
+         }
+         vertices.forEach(function(vertex) {
+             ctx.lineTo(vertex.x, vertex.y); });
+     };
+
+     fascia.ready(function() {
+         'use strict';
+         var applegend = 'Draw';
+         var redraw = function() {};
+
+         return {
+             init: function(camera, canvas, container, fasciaRedraw) {
+                 canvas.style.background = 'rgb(224, 224, 224)';
+                 redraw = fasciaRedraw;
+             },
+             draw: function(ctx, camera, now, last) {
+                 var size = Math.min(camera.width, camera.height);
+                 ctx.lineCap = 'round';
+                 ctx.lineWidth = size / 250;
+
+                 ctx.beginPath();
+                 polygons.forEach(function(polygon) {
+                     console.log("BOOp");
+                     drawPolygon(ctx, adjust(
+                         polygon.vertices, camera.width, camera.height));
+                 });
+                 ctx.fillStyle = 'lightgreen';
+                 ctx.fill();
+                 ctx.strokeStyle = 'purple';
+                 ctx.stroke();
+
+                 ctx.beginPath();
+                 ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'top';
+                 ctx.font = 'bold ' + Math.round(
+                     Math.min(camera.height, camera.width) / 20) +
+                            'px sans';
+                 ctx.fillText(applegend, 0, -camera.height/2);
+             },
+             tap: function(event, camera) {
+             },
+             wheel: function(event, camera)
+             { camera.zoom(1 + 0.1 * event.y, 1, 10); },
+         }
+     }); //]]></script>
