@@ -24,10 +24,15 @@
          {x: 0.40, y: 0.40} ]
  }, {
      vertices: [
-         {x: 0.6, y: 0.2},
-         {x: 0.9, y: 0.2},
-         {x: 0.9, y: 0.5},
-         {x: 0.6, y: 0.5} ]
+         {x: 0.7, y: 0.25},
+         {x: 0.55, y: 0.25},
+         {x: 0.55, y: 0.40} ]
+	},{
+	vertices: [
+         {x: 0.4, y: 0.8},
+         {x: 0.3, y: 0.8},
+         {x: 0.2, y: 0.5},
+         {x: 0.4, y: 0.5} ]
  }];
 
      var adjust = function(polygon, width, height) {
@@ -62,11 +67,10 @@
 
                  ctx.beginPath();
                  polygons.forEach(function(polygon) {
-                     console.log("BOOp");
                      drawPolygon(ctx, adjust(
                          polygon.vertices, camera.width, camera.height));
                  });
-                 ctx.fillStyle = 'lightgreen';
+                 ctx.fillStyle = 'lightblue';
                  ctx.fill();
                  ctx.strokeStyle = 'purple';
                  ctx.stroke();
