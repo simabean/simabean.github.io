@@ -19,74 +19,79 @@
 
  var polygons = [{
      vertices: [
-         {x: 0.25, y: 0.25},
-         {x: 0.40, y: 0.25},
-         {x: 0.40, y: 0.40} ]
+         {x: 0.3, y: 0.25},
+         {x: 0.45, y: 0.25},
+         {x: 0.45, y: 0.40} ]
  }, {
      vertices: [
          {x: 0.7, y: 0.25},
          {x: 0.55, y: 0.25},
          {x: 0.55, y: 0.40} ]
-	},{
-	vertices: [
-         {x: 0.4, y: 0.8},
-         {x: 0.3, y: 0.8},
+ }, {
+     vertices: [
          {x: 0.2, y: 0.5},
-         {x: 0.4, y: 0.5} ]
+         {x: 0.3, y: 0.8},
+         {x: 0.7, y: 0.8},
+         {x: 0.8, y: 0.5},
+         {x: 0.6, y: 0.5},
+         {x: 0.6, y: 0.65},
+         {x: 0.4, y: 0.65},
+         {x: 0.4, y: 0.5},
+     ]
  }];
 
-     var adjust = function(polygon, width, height) {
-         return polygon.map(function(point) {
-             return { x: (point.x - 0.5) * width,
-                      y: (point.y - 0.5) * height }; });
+ var adjust = function(polygon, width, height) {
+     return polygon.map(function(point) {
+         return { x: (point.x - 0.5) * width,
+                  y: (point.y - 0.5) * height }; });
+ }
+
+ var drawPolygon = function(ctx, vertices) {
+     if (vertices.length > 0) {
+         var last = vertices[vertices.length - 1];
+         ctx.moveTo(last.x, last.y);
      }
+     vertices.forEach(function(vertex) {
+         ctx.lineTo(vertex.x, vertex.y); });
+ };
 
-     var drawPolygon = function(ctx, vertices) {
-         if (vertices.length > 0) {
-             var last = vertices[vertices.length - 1];
-             ctx.moveTo(last.x, last.y);
-         }
-         vertices.forEach(function(vertex) {
-             ctx.lineTo(vertex.x, vertex.y); });
-     };
+ fascia.ready(function() {
+     'use strict';
+     var applegend = 'Trick or Treat';
+     var redraw = function() {};
 
-     fascia.ready(function() {
-         'use strict';
-         var applegend = 'Draw';
-         var redraw = function() {};
+     return {
+         init: function(camera, canvas, container, fasciaRedraw) {
+             canvas.style.background = 'orange';
+             redraw = fasciaRedraw;
+         },
+         draw: function(ctx, camera, now, last) {
+             var size = Math.min(camera.width, camera.height);
+             ctx.lineCap = 'round';
+             ctx.lineWidth = size / 250;
 
-         return {
-             init: function(camera, canvas, container, fasciaRedraw) {
-                 canvas.style.background = 'rgb(224, 224, 224)';
-                 redraw = fasciaRedraw;
-             },
-             draw: function(ctx, camera, now, last) {
-                 var size = Math.min(camera.width, camera.height);
-                 ctx.lineCap = 'round';
-                 ctx.lineWidth = size / 250;
+             ctx.beginPath();
+             polygons.forEach(function(polygon) {
+                 drawPolygon(ctx, adjust(
+                     polygon.vertices, camera.width, camera.height));
+             });
+             ctx.fillStyle = 'orangered';
+             ctx.fill();
+             ctx.strokeStyle = 'purple';
+             ctx.stroke();
 
-                 ctx.beginPath();
-                 polygons.forEach(function(polygon) {
-                     drawPolygon(ctx, adjust(
-                         polygon.vertices, camera.width, camera.height));
-                 });
-                 ctx.fillStyle = 'lightblue';
-                 ctx.fill();
-                 ctx.strokeStyle = 'purple';
-                 ctx.stroke();
-
-                 ctx.beginPath();
-                 ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-                 ctx.textAlign = 'center';
-                 ctx.textBaseline = 'top';
-                 ctx.font = 'bold ' + Math.round(
-                     Math.min(camera.height, camera.width) / 20) +
-                            'px sans';
-                 ctx.fillText(applegend, 0, -camera.height/2);
-             },
-             tap: function(event, camera) {
-             },
-             wheel: function(event, camera)
-             { camera.zoom(1 + 0.1 * event.y, 1, 10); },
-         }
-     }); //]]></script>
+             ctx.beginPath();
+             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+             ctx.textAlign = 'center';
+             ctx.textBaseline = 'top';
+             ctx.font = 'bold ' + Math.round(
+                 Math.min(camera.height, camera.width) / 20) +
+                        'px sans';
+             ctx.fillText(applegend, 0, -camera.height/2);
+         },
+         tap: function(event, camera) {
+         },
+         wheel: function(event, camera)
+         { camera.zoom(1 + 0.1 * event.y, 1, 10); },
+     }
+ }); //]]></script>
